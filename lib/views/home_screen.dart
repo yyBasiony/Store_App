@@ -36,18 +36,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return const Center(child: Text("No Categories Available"));
                 } else {
-                  return SizedBox(
-                      height: 50,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (_, index) =>
-                            CategoryChip(category: snapshot.data![index]),
-                      ));
+                  return Column(children: [
+                    SizedBox(
+                        height: 50,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (_, index) =>
+                              CategoryChip(category: snapshot.data![index]),
+                        )),
+                    const SizedBox(height: 10),
+                    Expanded(
+                        child: ProductsGrid(productsFuture: _productsFuture))
+                  ]);
                 }
               }),
-          const SizedBox(height: 10),
-          Expanded(child: ProductsGrid(productsFuture: _productsFuture))
         ]));
   }
 }
