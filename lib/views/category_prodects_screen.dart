@@ -5,10 +5,8 @@ import '../widget/products_grid.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
   final String categoryName;
-
   const CategoryProductsScreen({Key? key, required this.categoryName})
       : super(key: key);
-
   @override
   State<CategoryProductsScreen> createState() => _CategoryProductsScreenState();
 }
@@ -26,10 +24,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.categoryName),
-      ),
-      body: ProductsGrid(productsFuture: _productsFuture),
-    );
+        appBar: AppBar(title: Text(widget.categoryName)),
+        body: ProductsGrid(productsFuture: _productsFuture));
   }
 }

@@ -7,7 +7,6 @@ class ProductsGrid extends StatelessWidget {
 
   const ProductsGrid({Key? key, required this.productsFuture})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<ProdectModel>>(
@@ -21,16 +20,15 @@ class ProductsGrid extends StatelessWidget {
           return const Center(child: Text("No Products Found"));
         } else {
           return GridView.builder(
-            padding: const EdgeInsets.all(8.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.9,
-            ),
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              return ProductCard(product: snapshot.data![index]);
-            },
-          );
+              padding: const EdgeInsets.all(8),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.9,
+              ),
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return ProductCard(product: snapshot.data![index]);
+              });
         }
       },
     );
