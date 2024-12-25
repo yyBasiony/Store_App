@@ -24,33 +24,38 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Store App"), centerTitle: true),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          FutureBuilder<List<dynamic>>(
-              future: _categoriesFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text("No Categories Available"));
-                } else {
-                  return Column(children: [
-                    SizedBox(
-                        height: 50,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (_, index) =>
-                              CategoryChip(category: snapshot.data![index]),
-                        )),
-                    const SizedBox(height: 10),
-                    Expanded(
-                        child: ProductsGrid(productsFuture: _productsFuture))
-                  ]);
-                }
-              }),
-        ]));
+      appBar: AppBar(title: const Text("Store App"), centerTitle: true),
+      body: FutureBuilder<List<dynamic>>(
+        future: _categoriesFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text("No Categories Available"));
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 50,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index) =>
+                        CategoryChip(category: snapshot.data![index]),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: ProductsGrid(productsFuture: _productsFuture),
+                ),
+              ],
+            );
+          }
+        },
+      ),
+    );
   }
 }

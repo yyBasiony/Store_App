@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
                   child: Text(
                     product.title,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 12, fontWeight: FontWeight.bold),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   )),
@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Text(
                     '\$${product.price}',
-                    style: const TextStyle(fontSize: 14, color: Colors.green),
+                    style: const TextStyle(fontSize: 10, color: Colors.green),
                   ))
             ])));
   }
