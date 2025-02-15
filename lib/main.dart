@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app.dart';
+import 'package:store_app_api/app.dart';
 
 void main() {
-  runApp(const StoreApp());
+  runApp(const ShopeApp());
 }

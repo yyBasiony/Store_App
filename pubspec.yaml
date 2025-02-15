@@ -29,6 +29,9 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   http: ^1.2.2
+  google_fonts:
+  shared_preferences:
+  cached_network_image:
 http:
   flutter:
     sdk: flutter
