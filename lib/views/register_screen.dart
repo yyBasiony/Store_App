@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/auth_services.dart';
+import '../widgets/text_field.dart';
 import 'login_screen.dart';
+import '../widgets/password_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -32,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         firstNameController.text,
         lastNameController.text,
         phoneController.text,
-        " الزقازيق",
+        "الزقازيق",
         emailController.text,
         passwordController.text,
       );
@@ -49,15 +51,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await prefs.setString('phone', phoneController.text);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              backgroundColor: Colors.white,
-              content: Text(
-                "تم التسجيل بنجاح",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blueGrey,
-                ),
-              )),
+          const SnackBar(
+            backgroundColor: Colors.white,
+            content: Text(
+              "تم التسجيل بنجاح",
+              style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+            ),
+          ),
         );
 
         Navigator.pushReplacement(
@@ -97,31 +97,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 5),
-                _buildTextField('الاسم الأول', controller: firstNameController),
+                CustomTextField(
+                    label: 'الاسم الأول', controller: firstNameController),
                 const SizedBox(height: 8),
-                _buildTextField('اسم العائلة', controller: lastNameController),
+                CustomTextField(
+                    label: 'اسم العائلة', controller: lastNameController),
                 const SizedBox(height: 8),
-                _buildTextField('البريد الإلكتروني',
-                    isEmail: true, controller: emailController),
+                CustomTextField(
+                    label: 'البريد الإلكتروني',
+                    controller: emailController,
+                    isEmail: true),
                 const SizedBox(height: 8),
-                _buildTextField('رقم الهاتف',
-                    isPhone: true, controller: phoneController),
+                CustomTextField(
+                    label: 'رقم الهاتف',
+                    controller: phoneController,
+                    isPhone: true),
                 const SizedBox(height: 8),
-                _buildPasswordField('كلمة المرور',
+                PasswordField(
+                    label: 'كلمة المرور',
                     controller: passwordController,
-                    obscureText: _obscurePassword1, toggleObscure: () {
-                  setState(() {
-                    _obscurePassword1 = !_obscurePassword1;
-                  });
-                }),
+                    obscureText: _obscurePassword1,
+                    toggleObscure: () {
+                      setState(() {
+                        _obscurePassword1 = !_obscurePassword1;
+                      });
+                    }),
                 const SizedBox(height: 8),
-                _buildPasswordField('تأكيد كلمة المرور',
+                PasswordField(
+                    label: 'تأكيد كلمة المرور',
                     controller: confirmPasswordController,
-                    obscureText: _obscurePassword2, toggleObscure: () {
-                  setState(() {
-                    _obscurePassword2 = !_obscurePassword2;
-                  });
-                }),
+                    obscureText: _obscurePassword2,
+                    toggleObscure: () {
+                      setState(() {
+                        _obscurePassword2 = !_obscurePassword2;
+                      });
+                    }),
                 const SizedBox(height: 8),
                 ElevatedButton(
                   onPressed: _register,
@@ -144,10 +154,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'أو سجل باستخدام جوجل',
-                  style: TextStyle(color: Colors.black54, fontSize: 11),
-                ),
+                const Text('أو سجل باستخدام جوجل',
+                    style: TextStyle(color: Colors.black54, fontSize: 11)),
                 const SizedBox(height: 6),
                 OutlinedButton(
                   onPressed: () {},
@@ -155,13 +163,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     minimumSize: const Size(double.infinity, 50),
                     side: const BorderSide(color: Colors.blueGrey),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
+                        borderRadius: BorderRadius.circular(16)),
                   ),
-                  child: const Text(
-                    'المتابعة باستخدام جوجل',
-                    style: TextStyle(color: Colors.blueGrey),
-                  ),
+                  child: const Text('المتابعة باستخدام جوجل',
+                      style: TextStyle(color: Colors.blueGrey)),
                 ),
                 const SizedBox(height: 5),
                 Row(
@@ -170,80 +175,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     TextButton(
                       onPressed: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()));
                       },
                       child: const Text(
                         'تسجيل الدخول',
                         style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff005B50),
-                        ),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff005B50)),
                       ),
                     ),
-                    const Text(
-                      "هل لديك حساب بالفعل؟",
-                      style: TextStyle(fontSize: 10, color: Colors.red),
-                    ),
+                    const Text("هل لديك حساب بالفعل؟",
+                        style: TextStyle(fontSize: 10, color: Colors.red)),
                   ],
                 )
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildTextField(String label,
-      {bool isEmail = false,
-      bool isPhone = false,
-      required TextEditingController controller}) {
-    return TextFormField(
-      controller: controller,
-      textDirection: TextDirection.rtl,
-      keyboardType: isEmail
-          ? TextInputType.emailAddress
-          : isPhone
-              ? TextInputType.phone
-              : TextInputType.text,
-      decoration: InputDecoration(
-        labelText: label,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return '$label مطلوب';
-        }
-        if (isEmail && !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-          return 'الرجاء إدخال بريد إلكتروني صحيح';
-        }
-        if (isPhone && value.length != 11) {
-          return 'الرجاء إدخال رقم هاتف صحيح';
-        }
-        return null;
-      },
-    );
-  }
-
-  Widget _buildPasswordField(String label,
-      {required TextEditingController controller,
-      required bool obscureText,
-      required VoidCallback toggleObscure}) {
-    return TextFormField(
-      controller: controller,
-      obscureText: obscureText,
-      textDirection: TextDirection.rtl,
-      decoration: InputDecoration(
-        labelText: label,
-        suffixIcon: IconButton(
-          icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
-          onPressed: toggleObscure,
-        ),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }
