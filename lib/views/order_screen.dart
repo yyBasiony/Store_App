@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../models/orders_model.dart';
 import '../services/order_services.dart';
+import '../widgets/custom_app_bar.dart';
+import '../widgets/order_list.dart';
 
 class OrdersScreen extends StatefulWidget {
   @override
@@ -39,46 +40,15 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xff005B50)),
-        title: Text("الطلبات", style: TextStyle(color: Color(0xff005B50))),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(title: "الطلبات"),
       ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : _orders.isEmpty
               ? Center(child: Text("!!! لا يوجد طلبات بعد"))
-              : ListView.builder(
-                  itemCount: _orders.length,
-                  itemBuilder: (context, index) {
-                    var order = _orders[index];
-                    return Card(
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      child: ListTile(
-                        leading: Image.network(
-                          order.imageUrl,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => Icon(
-                              Icons.image_not_supported,
-                              size: 50,
-                              color: Colors.grey),
-                        ),
-                        title: Text(order.name,
-                            style:
-                                TextStyle(fontSize: 15, color: Colors.black)),
-                        subtitle: Text(
-                            "الكمية: ${order.quantity}     السعر: \$${order.price.toStringAsFixed(2)}",
-                            style: TextStyle(
-                                fontSize: 12, color: Colors.blueGrey)),
-                        trailing: Text(
-                          order.createdAt,
-                          style: TextStyle(fontSize: 12, color: Colors.grey),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+              : OrdersList(orders: _orders),
     );
   }
 }

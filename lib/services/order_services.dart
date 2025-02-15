@@ -13,7 +13,6 @@ class OrderService {
       Uri.parse("${ApiService.baseUrl}/orders?token=$token"),
       headers: {"Accept": "application/json"},
     );
-
     print(" Orders Response: ${response.body}");
 
     if (response.statusCode == 200) {
