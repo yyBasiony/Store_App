@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_services.dart';
+import '../widgets/custom_app_bar.dart';
 
 class LogoutPage extends StatefulWidget {
   @override
@@ -26,11 +27,9 @@ class _LogoutPageState extends State<LogoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("تسجيل الخروج"),
-        centerTitle: true,
-        backgroundColor: Color(0xff005B50),
-        foregroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(title: "تسجيل الخروج"),
       ),
       body: Center(
         child: Column(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_app_bar.dart';
+
 class ContactUsScreen extends StatefulWidget {
   @override
   _ContactUsScreenState createState() => _ContactUsScreenState();
@@ -32,9 +34,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('اتصل بنا', style: TextStyle(color: Color(0xff005B50))),
-        iconTheme: IconThemeData(color: Color(0xff005B50)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: CustomAppBar(title: "اتصل بنا"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
