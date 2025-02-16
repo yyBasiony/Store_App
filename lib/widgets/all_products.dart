@@ -5,7 +5,6 @@ import '../services/prodcut_services.dart';
 class AllProducts extends StatelessWidget {
   final ProductService productService;
   AllProducts({required this.productService});
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

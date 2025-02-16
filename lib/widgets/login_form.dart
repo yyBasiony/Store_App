@@ -3,8 +3,8 @@ import 'package:store_app_api/views/register_screen.dart';
 import '../models/user_model.dart';
 import '../services/auth_services.dart';
 import '../views/home_screen.dart';
-import '../widgets/text_field.dart';
-import '../widgets/password_field.dart';
+import 'text_field.dart';
+import 'password_field.dart';
 
 class LoginForm extends StatefulWidget {
   @override
