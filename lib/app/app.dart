@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../onboarding/onboarding_screen.dart';
+import '../presentation/onboarding/onboarding_screen.dart';
 import '../presentation/resources/app_theme.dart';
 
 class ShopeApp extends StatelessWidget {

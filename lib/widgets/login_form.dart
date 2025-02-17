@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:store_app_api/views/register_screen.dart';
+import 'package:store_app_api/presentation/auth/register/register_screen.dart';
 import '../models/user_model.dart';
 import '../services/auth_services.dart';
 import '../views/home_screen.dart';
-import 'text_field.dart';
-import 'password_field.dart';
+import '../presentation/auth/widgets/text_field.dart';
+import '../presentation/auth/widgets/password_field.dart';
 
 class LoginForm extends StatefulWidget {
   @override

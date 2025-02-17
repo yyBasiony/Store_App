@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../views/login_screen.dart';
-import '../views/register_screen.dart';
 import 'resources/app_assets.dart';
+import 'resources/app_routes.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -44,16 +42,14 @@ class WelcomeScreen extends StatelessWidget {
   Widget _buildRegisterButton(BuildContext context) {
     return ElevatedButton(
       child: const Text('إنشاء حساب'),
-      onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (_) => RegisterScreen())),
+      onPressed: () => Navigator.pushNamed(context, AppRoutes.registerScreen),
     );
   }
 
   Widget _buildLoginButton(BuildContext context) {
     return OutlinedButton(
       child: const Text('تسجيل الدخول'),
-      onPressed: () => Navigator.push(
-          context, MaterialPageRoute(builder: (_) => LoginScreen())),
+      onPressed: () => Navigator.pushNamed(context, AppRoutes.loginScreen),
     );
   }
 }
