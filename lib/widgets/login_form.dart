@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:store_app_api/presentation/auth/register/register_screen.dart';
 import '../models/user_model.dart';
+import '../presentation/auth/widgets/custom_auth_with_google.dart';
+import '../presentation/resources/app_routes.dart';
 import '../services/auth_services.dart';
 import '../views/home_screen.dart';
 import '../presentation/auth/widgets/text_field.dart';
@@ -136,52 +138,10 @@ class _LoginFormState extends State<LoginForm> {
                   ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'أو سجل الدخول باستخدام جوجل',
-            style: TextStyle(color: Colors.black54, fontSize: 11),
-          ),
-          const SizedBox(height: 8),
-          OutlinedButton(
-            onPressed: () {},
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 50),
-              side: const BorderSide(color: Colors.blueGrey),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Text(
-              'المتابعة باستخدام جوجل',
-              style: TextStyle(color: Colors.blueGrey),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()),
-                    );
-                  },
-                  child: const Text(
-                    'سجل الآن',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff005B50),
-                    ),
-                  )),
-              const Text(
-                "ليس لديك حساب؟",
-                style: TextStyle(
-                  fontSize: 10,
-                  color: Colors.red,
-                ),
-              ),
-            ],
+          const CustomAuthWithGoogle(
+            buttonText: 'سجل الآن',
+            questionText: "ليس لديك حساب؟",
+            routeName: AppRoutes.registerScreen,
           ),
         ],
       ),

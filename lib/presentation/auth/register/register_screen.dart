@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../services/auth_services.dart';
 import '../../resources/app_routes.dart';
+import '../widgets/custom_auth_with_google.dart';
 import '../widgets/text_field.dart';
-import '../../../views/login_screen.dart';
 import '../widgets/password_field.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -144,44 +144,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         color: Colors.white,
                                       ))),
                           const SizedBox(height: 8),
-                          const Text('أو سجل باستخدام جوجل',
-                              style: TextStyle(
-                                  color: Colors.black54, fontSize: 11)),
-                          const SizedBox(height: 6),
-                          OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 50),
-                              side: const BorderSide(color: Colors.blueGrey),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16)),
-                            ),
-                            child: const Text('المتابعة باستخدام جوجل',
-                                style: TextStyle(color: Colors.blueGrey)),
+                          const CustomAuthWithGoogle(
+                            buttonText: 'سجل الدخول',
+                            questionText: "هل لديك حساب بالفعل؟",
+                            routeName: AppRoutes.loginScreen,
                           ),
-                          const SizedBox(height: 5),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen()));
-                                    },
-                                    child: const Text(
-                                      'تسجيل الدخول',
-                                      style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff005B50)),
-                                    )),
-                                const Text("هل لديك حساب بالفعل؟",
-                                    style: TextStyle(
-                                        fontSize: 10, color: Colors.red)),
-                              ])
                         ])))));
   }
 }
