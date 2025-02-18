@@ -5,6 +5,8 @@ import '../services/prodcut_services.dart';
 import 'products_list_page.dart';
 
 class CategoryScreen extends StatefulWidget {
+  const CategoryScreen({super.key});
+
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }
@@ -40,10 +42,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xff005B50)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xff005B50)),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(
+        title: const Text(
           "التصنيفات",
           style: TextStyle(
             color: Color(0xff005B50),
@@ -54,9 +56,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         elevation: 0,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: ListView.builder(
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
@@ -74,10 +76,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 12),
+                      margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black26,
                             blurRadius: 5,
@@ -120,14 +122,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             bottom: 20,
                             child: Text(
                               category.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          Positioned(
+                          const Positioned(
                             right: 20,
                             bottom: 20,
                             child: Icon(

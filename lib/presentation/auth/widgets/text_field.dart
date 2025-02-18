@@ -1,70 +1,55 @@
 import 'package:flutter/material.dart';
 
+import '../base/controller.dart';
+import '../base/validation.dart';
+
 class CustomTextField extends StatefulWidget {
   final String label;
-  final bool isEmail;
-  final bool isPhone;
-  final bool isPassword;
-  final TextEditingController controller;
-  const CustomTextField({
-    Key? key,
-    required this.label,
-    required this.controller,
-    this.isEmail = false,
-    this.isPhone = false,
-    this.isPassword = false,
-  }) : super(key: key);
+  final AuthController controller;
+
+  const CustomTextField({super.key, required this.label, required this.controller});
 
   @override
-  _CustomTextFieldState createState() => _CustomTextFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool _obscureText = true;
+  bool _isObscured = true;
+  late final Validation _validation;
+  late final TextEditingController _controller;
+
+  bool get _isPassword => widget.label.toLowerCase().contains("password");
+
+  TextInputType get _keyboardType => widget.label.toLowerCase().contains("email")
+      ? TextInputType.emailAddress
+      : widget.label.toLowerCase().contains("phone")
+          ? TextInputType.phone
+          : TextInputType.text;
+
+  IconButton _buildObscureEye() {
+    return IconButton(
+      onPressed: () => setState(() => _isObscured = !_isObscured),
+      icon: Icon(_isObscured ? Icons.visibility_off_rounded : Icons.visibility_rounded),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _validation = Validation.fromLabel(widget.label);
+    _controller = widget.controller.controllers[widget.label]!;
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: widget.controller,
-        keyboardType: widget.isEmail
-            ? TextInputType.emailAddress
-            : widget.isPhone
-                ? TextInputType.phone
-                : TextInputType.text,
-        obscureText: widget.isPassword ? _obscureText : false,
-        textDirection: TextDirection.rtl,
-        textAlign: TextAlign.right,
-        style: const TextStyle(fontSize: 14, color: Colors.black),
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          labelText: widget.label,
-          labelStyle: const TextStyle(fontSize: 14, color: Color(0xffACA7A7)),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-          suffixIcon: widget.isPassword
-              ? IconButton(
-                  icon: Icon(
-                      _obscureText ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                )
-              : null,
-        ),
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return '${widget.label} مطلوب';
-          }
-          if (widget.isEmail &&
-              !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-            return 'الرجاء إدخال بريد إلكتروني صحيح';
-          }
-          if (widget.isPhone && value.length != 11) {
-            return 'الرجاء إدخال رقم هاتف صحيح مكون من 11 رقمًا';
-          }
-          return null;
-        });
+      controller: _controller,
+      keyboardType: _keyboardType,
+      validator: _validation.validateAll,
+      cursorColor: const Color(0xff005B50),
+      obscureText: _isPassword ? _isObscured : false,
+      style: const TextStyle(fontSize: 14, color: Colors.black),
+      decoration: InputDecoration(labelText: widget.label, suffixIcon: _isPassword ? _buildObscureEye() : null),
+    );
   }
 }

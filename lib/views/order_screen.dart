@@ -5,6 +5,8 @@ import '../widgets/custom_app_bar.dart';
 import '../widgets/order_list.dart';
 
 class OrdersScreen extends StatefulWidget {
+  const OrdersScreen({super.key});
+
   @override
   _OrdersScreenState createState() => _OrdersScreenState();
 }
@@ -41,13 +43,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: "الطلبات"),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _orders.isEmpty
-              ? Center(child: Text("!!! لا يوجد طلبات بعد"))
+              ? const Center(child: Text("!!! لا يوجد طلبات بعد"))
               : OrdersList(orders: _orders),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -33,21 +35,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xff005B50)),
+        iconTheme: const IconThemeData(color: Color(0xff005B50)),
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Color(0xff005B50)),
+          icon: const Icon(Icons.arrow_back, color: Color(0xff005B50)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("الملف الشخصي", style: TextStyle(color: Color(0xff005B50))),
+        title: const Text("الملف الشخصي", style: TextStyle(color: Color(0xff005B50))),
         centerTitle: true,
       ),
       body: Column(
         children: [
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           Column(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 75,
                 backgroundColor: Color(0xff005B50),
                 child: CircleAvatar(
@@ -55,19 +57,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   backgroundImage: AssetImage("assets/profile.jpg"),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "$firstName $lastName",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           ProfileTextField(label: "الاسم الأول", value: firstName),
           ProfileTextField(label: "اسم العائلة", value: lastName),
           ProfileTextField(label: "البريد الإلكتروني", value: email),
@@ -82,7 +84,7 @@ class ProfileTextField extends StatelessWidget {
   final String label;
   final String value;
 
-  ProfileTextField({required this.label, required this.value});
+  const ProfileTextField({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,7 @@ class ProfileTextField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           TextField(
             readOnly: true,
@@ -103,7 +105,7 @@ class ProfileTextField extends StatelessWidget {
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey.shade400),
               ),
-              focusedBorder: UnderlineInputBorder(
+              focusedBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.teal),
               ),
             ),

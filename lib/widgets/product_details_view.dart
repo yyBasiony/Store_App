@@ -6,7 +6,7 @@ class ProductDetailsView extends StatelessWidget {
   final bool isAdding;
   final VoidCallback onAddToCart;
 
-  ProductDetailsView({
+  const ProductDetailsView({super.key, 
     required this.productDetails,
     required this.isAdding,
     required this.onAddToCart,
@@ -17,9 +17,9 @@ class ProductDetailsView extends StatelessWidget {
     return Center(
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           child: Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -36,41 +36,41 @@ class ProductDetailsView extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   productDetails.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   productDetails.description,
-                  style: TextStyle(fontSize: 16, color: Colors.black54),
+                  style: const TextStyle(fontSize: 16, color: Colors.black54),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   "\$${productDetails.price.toStringAsFixed(2)}",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 22,
                       color: Color(0xff64C3BF),
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: onAddToCart,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff6c7376),
+                      backgroundColor: const Color(0xff6c7376),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),
                     child: isAdding
-                        ? CircularProgressIndicator(color: Color(0xff6c7376))
-                        : Text("إضافة إلى السلة 🛒",
+                        ? const CircularProgressIndicator(color: Color(0xff6c7376))
+                        : const Text("إضافة إلى السلة 🛒",
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                   ),

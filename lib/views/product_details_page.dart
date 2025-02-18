@@ -6,7 +6,7 @@ import '../widgets/product_details_view.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
-  ProductDetailsScreen({required this.productId});
+  const ProductDetailsScreen({super.key, required this.productId});
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -53,7 +53,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         backgroundColor: Colors.white,
         content: Text(
           success ? "تم إضافة المنتج إلى السلة" : "فشل في إضافة المنتج!",
-          style: TextStyle(fontSize: 12, color: Colors.blueGrey),
+          style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
         ),
       ),
     );
@@ -67,16 +67,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         title: Text(
           _productDetails?.name ?? "تفاصيل المنتج",
           style:
-              TextStyle(color: Color(0xff005B50), fontWeight: FontWeight.bold),
+              const TextStyle(color: Color(0xff005B50), fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Color(0xff005B50)),
+        iconTheme: const IconThemeData(color: Color(0xff005B50)),
         elevation: 0,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _productDetails == null
-              ? Center(child: Text("تعذر تحميل المنتج"))
+              ? const Center(child: Text("تعذر تحميل المنتج"))
               : ProductDetailsView(
                   productDetails: _productDetails!,
                   isAdding: _isAdding,

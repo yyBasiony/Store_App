@@ -7,6 +7,8 @@ import 'package:store_app_api/widgets/drawer_item.dart';
 import '../views/conacte_us_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -17,17 +19,17 @@ class CustomDrawer extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              SizedBox(height: 140),
+              const SizedBox(height: 140),
               Container(
                 height: 140,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/onbord3.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               DrawerItem(
                   icon: Icons.person,
                   title: "الملف الشخصي",
@@ -41,8 +43,8 @@ class CustomDrawer extends StatelessWidget {
                   title: "اتصل بنا",
                   screen: ContactUsScreen()),
               ListTile(
-                leading: Icon(Icons.logout, color: Colors.red, size: 30),
-                title: Text("تسجيل الخروج"),
+                leading: const Icon(Icons.logout, color: Colors.red, size: 30),
+                title: const Text("تسجيل الخروج"),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LogoutPage()));

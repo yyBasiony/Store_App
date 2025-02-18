@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final dynamic product;
   final bool isNewArrival;
-  ProductCard({required this.product, this.isNewArrival = false});
+  const ProductCard({super.key, required this.product, this.isNewArrival = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200,
-      margin: EdgeInsets.only(right: 12),
+      margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(0, 2))
         ],
       ),
@@ -47,7 +47,7 @@ class ProductCard extends StatelessWidget {
             bottom: 20,
             child: Text(
               "\$${product['price']}",
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color(0xff64C3BF),
                   fontSize: 10,
                   fontWeight: FontWeight.bold),

@@ -6,6 +6,8 @@ import '../widgets/cart_total.dart';
 import '../widgets/custom_app_bar.dart';
 
 class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
+
   @override
   _CartScreenState createState() => _CartScreenState();
 }
@@ -52,7 +54,7 @@ class _CartScreenState extends State<CartScreen> {
         _cartItems.removeWhere((item) => item.id == cartItemId);
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.white,
           content: Text(
             "تم حذف المنتج من السلة",
@@ -72,13 +74,13 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: "ٍسلة المشتريات"),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _cartItems.isEmpty
-              ? Center(child: Text("🛒 السلة فارغة"))
+              ? const Center(child: Text("🛒 السلة فارغة"))
               : Column(
                   children: [
                     Expanded(
@@ -103,7 +105,7 @@ class _CartScreenState extends State<CartScreen> {
     bool success = await _cartService.checkoutCart();
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.white,
           content: Text("تم تنفيذ الطلب بنجاح",
               style: TextStyle(fontSize: 12, color: Colors.blueGrey)),
@@ -112,7 +114,7 @@ class _CartScreenState extends State<CartScreen> {
       setState(() => _cartItems.clear());
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           backgroundColor: Colors.white,
           content: Text("!فشل في تنفيذ الطلب",
               style: TextStyle(fontSize: 12, color: Colors.blueGrey)),

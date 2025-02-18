@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../services/auth_services.dart';
 import '../../resources/app_routes.dart';
 import '../widgets/custom_auth_with_google.dart';
-import '../widgets/text_field.dart';
 import '../widgets/password_field.dart';
+import '../widgets/text_field.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final AuthService _authService = AuthService();
+  bool _isLoading = false;
   bool _obscurePassword1 = true;
   bool _obscurePassword2 = true;
-  bool _isLoading = false;
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final _authService = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   void _register() async {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
+      setState(() => _isLoading = true);
 
       final response = await _authService.register(
         firstNameController.text,
@@ -37,9 +39,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         emailController.text,
         passwordController.text,
       );
-      setState(() {
-        _isLoading = false;
-      });
+      setState(() => _isLoading = false);
       if (response["state"] == true) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('first_name', firstNameController.text);
@@ -47,13 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         await prefs.setString('user_email', emailController.text);
         await prefs.setString('phone', phoneController.text);
 
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            backgroundColor: Colors.white,
-            content: Text(
-              "تم التسجيل بنجاح",
-              style: TextStyle(fontSize: 12, color: Colors.blueGrey),
-            )));
-
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("تم التسجيل بنجاح")));
         Navigator.pushNamed(context, AppRoutes.loginScreen);
       }
     }
@@ -62,93 +56,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Color(0xff005B50)),
-            onPressed: () => Navigator.pop(context),
+      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('إنشاء حساب جديد', style: TextStyle(fontSize: 20, color: Color(0xff005B50), fontWeight: FontWeight.bold)),
+                const SizedBox(height: 5),
+                // CustomTextField(label: 'الاسم الأول', controller: firstNameController),
+                // const SizedBox(height: 8),
+                // CustomTextField(label: 'اسم العائلة', controller: lastNameController),
+                // const SizedBox(height: 8),
+                // CustomTextField(label: 'البريد الإلكتروني', controller: emailController),
+                // const SizedBox(height: 8),
+                // CustomTextField(label: 'رقم الهاتف', controller: phoneController),
+                const SizedBox(height: 8),
+                PasswordField(
+                  label: 'كلمة المرور',
+                  controller: passwordController,
+                  obscureText: _obscurePassword1,
+                  toggleObscure: () => setState(() => _obscurePassword1 = !_obscurePassword1),
+                ),
+                const SizedBox(height: 8),
+                PasswordField(
+                  label: 'تأكيد كلمة المرور',
+                  obscureText: _obscurePassword2,
+                  controller: confirmPasswordController,
+                  toggleObscure: () => setState(() => _obscurePassword2 = !_obscurePassword2),
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                    onPressed: _register, child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text('التسجيل')),
+                const SizedBox(height: 8),
+                const CustomAuthWithGoogle(buttonText: 'سجل الدخول', questionText: "هل لديك حساب بالفعل؟", routeName: AppRoutes.loginScreen),
+              ],
+            ),
           ),
         ),
-        backgroundColor: Colors.white,
-        body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SingleChildScrollView(
-                child: Form(
-                    key: _formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'إنشاء حساب جديد',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff005B50),
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          CustomTextField(
-                              label: 'الاسم الأول',
-                              controller: firstNameController),
-                          const SizedBox(height: 8),
-                          CustomTextField(
-                              label: 'اسم العائلة',
-                              controller: lastNameController),
-                          const SizedBox(height: 8),
-                          CustomTextField(
-                              label: 'البريد الإلكتروني',
-                              controller: emailController,
-                              isEmail: true),
-                          const SizedBox(height: 8),
-                          CustomTextField(
-                              label: 'رقم الهاتف',
-                              controller: phoneController,
-                              isPhone: true),
-                          const SizedBox(height: 8),
-                          PasswordField(
-                              label: 'كلمة المرور',
-                              controller: passwordController,
-                              obscureText: _obscurePassword1,
-                              toggleObscure: () {
-                                setState(() {
-                                  _obscurePassword1 = !_obscurePassword1;
-                                });
-                              }),
-                          const SizedBox(height: 8),
-                          PasswordField(
-                              label: 'تأكيد كلمة المرور',
-                              controller: confirmPasswordController,
-                              obscureText: _obscurePassword2,
-                              toggleObscure: () {
-                                setState(() {
-                                  _obscurePassword2 = !_obscurePassword2;
-                                });
-                              }),
-                          const SizedBox(height: 8),
-                          ElevatedButton(
-                              onPressed: _register,
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xff005B50),
-                                  minimumSize: const Size(double.infinity, 50),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(16),
-                                  )),
-                              child: _isLoading
-                                  ? const CircularProgressIndicator(
-                                      color: Colors.white)
-                                  : const Text('التسجيل',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ))),
-                          const SizedBox(height: 8),
-                          const CustomAuthWithGoogle(
-                            buttonText: 'سجل الدخول',
-                            questionText: "هل لديك حساب بالفعل؟",
-                            routeName: AppRoutes.loginScreen,
-                          ),
-                        ])))));
+      ),
+    );
   }
 }

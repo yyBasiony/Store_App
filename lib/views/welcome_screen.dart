@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:store_app_api/views/login_screen.dart';
+import 'package:store_app_api/presentation/auth/login/login_screen.dart';
 import 'package:store_app_api/presentation/auth/register/register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xff005B50),
+                backgroundColor: const Color(0xff005B50),
                 minimumSize: const Size(double.infinity, 50),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),

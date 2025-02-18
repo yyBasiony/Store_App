@@ -7,6 +7,8 @@ import 'package:store_app_api/widgets/custom_drawer.dart';
 import 'package:store_app_api/widgets/custom_bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -34,10 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ? AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
-              iconTheme: IconThemeData(color: Color(0xff005B50)),
+              iconTheme: const IconThemeData(color: Color(0xff005B50)),
               actions: [
                 IconButton(
-                  icon: Icon(Icons.search, color: Color(0xff005B50), size: 45),
+                  icon: const Icon(Icons.search, color: Color(0xff005B50), size: 45),
                   onPressed: () {
                     showSearch(
                         context: context, delegate: ProductSearchDelegate());

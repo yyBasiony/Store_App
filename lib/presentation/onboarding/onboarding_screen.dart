@@ -17,7 +17,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
     } else {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => WelcomeScreen()));
+          context, MaterialPageRoute(builder: (context) => const WelcomeScreen()));
     }
   }
 
@@ -95,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: TextButton(
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                    MaterialPageRoute(builder: (context) => const WelcomeScreen()));
               },
               child: const Text('تخطي',
                   style: TextStyle(

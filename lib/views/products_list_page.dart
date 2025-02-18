@@ -8,7 +8,7 @@ class ProductsListPage extends StatefulWidget {
   final int categoryId;
   final String categoryName;
 
-  ProductsListPage({required this.categoryId, required this.categoryName});
+  const ProductsListPage({super.key, required this.categoryId, required this.categoryName});
 
   @override
   _ProductsListPageState createState() => _ProductsListPageState();
@@ -51,24 +51,24 @@ class _ProductsListPageState extends State<ProductsListPage> {
         backgroundColor: Colors.white,
         title: Text(
           widget.categoryName,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color(0xff005B50),
             fontWeight: FontWeight.bold,
           ),
         ),
-        iconTheme: IconThemeData(color: Color(0xff005B50)),
+        iconTheme: const IconThemeData(color: Color(0xff005B50)),
         elevation: 0,
       ),
       body: isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(
                 color: Color(0xff005B50),
               ),
             )
           : products.isNotEmpty
               ? GridView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
@@ -91,7 +91,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.white,
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black12,
                               blurRadius: 5,
@@ -104,34 +104,34 @@ class _ProductsListPageState extends State<ProductsListPage> {
                           children: [
                             Expanded(
                               child: ClipRRect(
-                                borderRadius: BorderRadius.vertical(
+                                borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(15)),
                                 child: CachedNetworkImage(
                                   imageUrl: product.imageUrl,
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                   errorWidget: (context, url, error) =>
-                                      Icon(Icons.error, color: Colors.red),
+                                      const Icon(Icons.error, color: Colors.red),
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                 children: [
                                   Text(
                                     product.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                       color: Color(0xff005B50),
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     "${product.price} \$",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xff009688),
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
@@ -146,7 +146,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
                     );
                   },
                 )
-              : Center(
+              : const Center(
                   child: Text(
                     "لا توجد منتجات متاحة",
                     style: TextStyle(color: Color(0xff005B50), fontSize: 18),

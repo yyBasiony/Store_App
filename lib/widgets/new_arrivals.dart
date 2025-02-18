@@ -4,7 +4,7 @@ import '../services/prodcut_services.dart';
 
 class NewArrivals extends StatelessWidget {
   final ProductService productService;
-  NewArrivals({required this.productService});
+  const NewArrivals({super.key, required this.productService});
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +12,17 @@ class NewArrivals extends StatelessWidget {
       future: productService.getNewArrivals(),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text("لا توجد منتجات متاحة"));
+          return const Center(child: Text("لا توجد منتجات متاحة"));
         }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("المنتجات الجديدة",
+            const Text("المنتجات الجديدة",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             SizedBox(
               height: 140,
               child: ListView.builder(

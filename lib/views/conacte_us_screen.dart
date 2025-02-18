@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 
 class ContactUsScreen extends StatefulWidget {
+  const ContactUsScreen({super.key});
+
   @override
   _ContactUsScreenState createState() => _ContactUsScreenState();
 }
@@ -16,7 +18,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text(
             'تم إرسال رسالتك بنجاح!',
             style: TextStyle(fontSize: 12, color: Colors.blueGrey),
@@ -35,7 +37,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
+        preferredSize: const Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: "اتصل بنا"),
       ),
       body: Padding(
@@ -58,7 +60,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         decoration: InputDecoration(
                           labelText: 'الاسم الكامل',
                           prefixIcon:
-                              Icon(Icons.person, color: Color(0xff005B50)),
+                              const Icon(Icons.person, color: Color(0xff005B50)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12)),
                         ),
@@ -69,13 +71,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
                           labelText: 'البريد الإلكتروني',
                           prefixIcon:
-                              Icon(Icons.email, color: Color(0xff005B50)),
+                              const Icon(Icons.email, color: Color(0xff005B50)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12)),
                         ),
@@ -91,13 +93,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       TextFormField(
                         controller: _messageController,
                         decoration: InputDecoration(
                           labelText: 'الرسالة',
                           prefixIcon:
-                              Icon(Icons.message, color: Color(0xff005B50)),
+                              const Icon(Icons.message, color: Color(0xff005B50)),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12)),
                         ),
@@ -109,11 +111,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       FloatingActionButton(
                         onPressed: _submitForm,
-                        backgroundColor: Color(0xff005B50),
-                        child: Icon(Icons.send, color: Colors.white),
+                        backgroundColor: const Color(0xff005B50),
+                        child: const Icon(Icons.send, color: Colors.white),
                       ),
                     ],
                   ),
