@@ -12,7 +12,7 @@ class ShopeApp extends StatelessWidget {
       routes: AppRoutes.routes,
       theme: AppTheme.getLightTheme(),
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginScreen,
+      initialRoute: AppRoutes.registerScreen,
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../base/controller.dart';
 import '../base/validation.dart';
 
@@ -7,7 +6,8 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final AuthController controller;
 
-  const CustomTextField({super.key, required this.label, required this.controller});
+  const CustomTextField(
+      {super.key, required this.label, required this.controller});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -20,36 +20,45 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   bool get _isPassword => widget.label.toLowerCase().contains("password");
 
-  TextInputType get _keyboardType => widget.label.toLowerCase().contains("email")
-      ? TextInputType.emailAddress
-      : widget.label.toLowerCase().contains("phone")
-          ? TextInputType.phone
-          : TextInputType.text;
+  TextInputType get _keyboardType =>
+      widget.label.toLowerCase().contains("email")
+          ? TextInputType.emailAddress
+          : widget.label.toLowerCase().contains("phone")
+              ? TextInputType.phone
+              : TextInputType.text;
 
-  IconButton _buildObscureEye() {
+  IconButton? _buildObscureEye() {
+    if (!_isPassword) return null;
     return IconButton(
       onPressed: () => setState(() => _isObscured = !_isObscured),
-      icon: Icon(_isObscured ? Icons.visibility_off_rounded : Icons.visibility_rounded),
+      icon: Icon(_isObscured
+          ? Icons.visibility_off_rounded
+          : Icons.visibility_rounded),
     );
   }
 
   @override
   void initState() {
     super.initState();
-    _validation = Validation.fromLabel(widget.label);
-    _controller = widget.controller.controllers[widget.label]!;
+    _validation = Validation.fromLabel(widget.label, widget.controller);
+
+    if (!widget.controller.controllers.containsKey(widget.label)) {
+      _controller = TextEditingController();
+    } else {
+      _controller = widget.controller.controllers[widget.label]!;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _controller,
-      keyboardType: _keyboardType,
-      validator: _validation.validateAll,
-      cursorColor: const Color(0xff005B50),
-      obscureText: _isPassword ? _isObscured : false,
-      style: const TextStyle(fontSize: 14, color: Colors.black),
-      decoration: InputDecoration(labelText: widget.label, suffixIcon: _isPassword ? _buildObscureEye() : null),
-    );
+        controller: _controller,
+        keyboardType: _keyboardType,
+        validator: _validation.validateAll,
+        cursorColor: const Color(0xff005B50),
+        obscureText: _isPassword ? _isObscured : false,
+        style: const TextStyle(fontSize: 14, color: Colors.black),
+        decoration: InputDecoration(
+            labelText: widget.label, suffixIcon: _buildObscureEye()));
   }
 }

@@ -103,9 +103,9 @@ class AuthService {
         body: jsonEncode({"email": email, "password": password}),
       );
 
-      print("🔍 Login Response: ${response.body}");
-
       final responseData = json.decode(response.body);
+
+      if (responseData.containsKey("message")) {}
 
       if (response.statusCode == 200 && responseData["state"] == true) {
         await _saveToken(responseData["data"]["token"]);

@@ -10,8 +10,8 @@ class LoginController extends AuthController {
   @override
   Future<bool> authenticate() async {
     if (formKey.currentState!.validate()) {
-      final response = await _authService.login(getFieldValue("Email"), getFieldValue("Password"));
-
+      final response = await _authService.login(
+          getFieldValue("Email"), getFieldValue("Password"));
       if (response["state"] == true) {
         UserModel userModel = UserModel.fromJson(response["data"]);
         return true;
