@@ -3,15 +3,7 @@ import '../../../services/auth_services.dart';
 import '../base/controller.dart';
 
 class RegisterController extends AuthController {
-  RegisterController()
-      : super([
-          "FirstName",
-          "LastName",
-          "Email",
-          "Phone",
-          "Password",
-          "ConfirmPassword"
-        ]);
+  RegisterController() : super(["FirstName", "LastName", "Email", "Phone", "Password", "Confirm Password"]);
 
   final _authService = AuthService();
 

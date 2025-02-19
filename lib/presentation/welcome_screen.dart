@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'resources/app_assets.dart';
 import 'resources/app_routes.dart';
 
@@ -19,37 +20,17 @@ class WelcomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('!مرحبًا',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Color(0xff005B50),
-                  fontWeight: FontWeight.bold)),
+          const Text('!مرحبًا', style: TextStyle(fontSize: 24, color: Color(0xff005B50), fontWeight: FontWeight.bold)),
           const SizedBox(height: 10),
-          const Text('!اكتشف الأشياء التي تحبها',
-              style: TextStyle(fontSize: 12, color: Colors.black)),
+          const Text('!اكتشف الأشياء التي تحبها', style: TextStyle(fontSize: 12, color: Colors.black)),
           const SizedBox(height: 30),
-          AspectRatio(
-              aspectRatio: 5 / 4, child: Image.asset(AppAssets.welcome)),
+          AspectRatio(aspectRatio: 5 / 4, child: Image.asset(AppAssets.welcome)),
           const SizedBox(height: 30),
-          _buildRegisterButton(context),
+          ElevatedButton(child: const Text('إنشاء حساب'), onPressed: () => Navigator.pushNamed(context, AppRoutes.registerScreen)),
           const SizedBox(height: 20),
-          _buildLoginButton(context),
+          OutlinedButton(child: const Text('تسجيل الدخول'), onPressed: () => Navigator.pushNamed(context, AppRoutes.loginScreen)),
         ],
       ),
-    );
-  }
-
-  Widget _buildRegisterButton(BuildContext context) {
-    return ElevatedButton(
-      child: const Text('إنشاء حساب'),
-      onPressed: () => Navigator.pushNamed(context, AppRoutes.registerScreen),
-    );
-  }
-
-  Widget _buildLoginButton(BuildContext context) {
-    return OutlinedButton(
-      child: const Text('تسجيل الدخول'),
-      onPressed: () => Navigator.pushNamed(context, AppRoutes.loginScreen),
     );
   }
 }

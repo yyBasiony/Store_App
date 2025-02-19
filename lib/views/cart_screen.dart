@@ -73,8 +73,8 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: "ٍسلة المشتريات"),
       ),
       body: _isLoading

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../resources/app_assets.dart';
 import '../../resources/app_routes.dart';
 import '../widgets/custom_auth_with_google.dart';
-import '../widgets/text_field.dart';
+import '../widgets/custom_text_field.dart';
 import 'login_controller.dart';
 
 class LoginScreen extends StatefulWidget {

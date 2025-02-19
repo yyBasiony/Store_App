@@ -1,7 +1,8 @@
 class AppAssets {
   AppAssets._();
+
   static const welcome = 'assets/welcome.png';
-  static const onboard1 = 'assets/onbord1.png';
-  static const onboard2 = 'assets/onbord2.png';
-  static const onboard3 = 'assets/onbord3.png';
+  static const onboarding1 = 'assets/onboarding1.png';
+  static const onboarding2 = 'assets/onboarding2.png';
+  static const onboarding3 = 'assets/onboarding3.png';
 }

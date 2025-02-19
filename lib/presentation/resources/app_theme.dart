@@ -13,6 +13,7 @@ class AppTheme {
 
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
+          iconColor: WidgetStatePropertyAll(Colors.white),
           foregroundColor: WidgetStatePropertyAll(Colors.white),
           minimumSize: WidgetStatePropertyAll(Size.fromHeight(50)),
           textStyle: WidgetStatePropertyAll(TextStyle(fontSize: 15)),

@@ -30,15 +30,15 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              DrawerItem(
+              const DrawerItem(
                   icon: Icons.person,
                   title: "الملف الشخصي",
                   screen: ProfileScreen()),
-              DrawerItem(
+              const DrawerItem(
                   icon: Icons.shopping_bag,
                   title: "طلباتي",
                   screen: OrdersScreen()),
-              DrawerItem(
+              const DrawerItem(
                   icon: Icons.contact_mail,
                   title: "اتصل بنا",
                   screen: ContactUsScreen()),
@@ -47,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
                 title: const Text("تسجيل الخروج"),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LogoutPage()));
+                      MaterialPageRoute(builder: (context) => const LogoutPage()));
                 },
               ),
             ],

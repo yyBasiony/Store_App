@@ -17,8 +17,8 @@ class CustomAuthWithGoogle extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextButton(child: Text(buttonText), onPressed: () => Navigator.pushNamed(context, routeName)),
             Text(questionText, style: const TextStyle(fontSize: 10, color: Colors.red)),
+            TextButton(child: Text(buttonText), onPressed: () => Navigator.pushNamed(context, routeName)),
           ],
         ),
       ],

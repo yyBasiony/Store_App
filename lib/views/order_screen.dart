@@ -42,8 +42,8 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
         child: CustomAppBar(title: "الطلبات"),
       ),
       body: _isLoading

@@ -26,7 +26,7 @@ class CartTotal extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
               backgroundColor: const Color(0xff005B50),
             ),
-            child: Text("إتمام الطلب",
+            child: const Text("إتمام الطلب",
                 style: TextStyle(fontSize: 15, color: Colors.white)),
           ),
         ],

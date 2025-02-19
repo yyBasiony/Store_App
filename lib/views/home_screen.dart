@@ -18,8 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     HomeContent(),
-    CategoryScreen(),
-    CartScreen(),
+    const CategoryScreen(),
+    const CartScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             )
           : null,
-      drawer: _selectedIndex == 0 ? CustomDrawer() : null,
+      drawer: _selectedIndex == 0 ? const CustomDrawer() : null,
       body: _screens[_selectedIndex],
       bottomNavigationBar: CustomBottomNavBar(
         selectedIndex: _selectedIndex,
