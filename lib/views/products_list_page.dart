@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../models/product_details_model.dart';
 import '../services/prodcut_services.dart';
-import 'product_details_page.dart';
+import 'product_details_screen.dart';
 
 class ProductsListPage extends StatefulWidget {
   final int categoryId;
   final String categoryName;
 
-  const ProductsListPage({super.key, required this.categoryId, required this.categoryName});
+  const ProductsListPage(
+      {super.key, required this.categoryId, required this.categoryName});
 
   @override
   _ProductsListPageState createState() => _ProductsListPageState();
@@ -67,7 +68,8 @@ class _ProductsListPageState extends State<ProductsListPage> {
             )
           : products.isNotEmpty
               ? GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
@@ -111,7 +113,8 @@ class _ProductsListPageState extends State<ProductsListPage> {
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                   errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error, color: Colors.red),
+                                      const Icon(Icons.error,
+                                          color: Colors.red),
                                 ),
                               ),
                             ),

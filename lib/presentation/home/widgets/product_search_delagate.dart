@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/prodcut_services.dart';
-import 'product_details_page.dart';
+import '../../../services/prodcut_services.dart';
+import '../../../views/product_details_screen.dart';
 
 class ProductSearchDelegate extends SearchDelegate {
   final ProductService _productService = ProductService();
@@ -71,8 +71,8 @@ class ProductSearchDelegate extends SearchDelegate {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductDetailsScreen(
-                    productId: product['id']), // ✅ الحل هنا
+                builder: (context) =>
+                    ProductDetailsScreen(productId: product['id']),
               ),
             );
           },

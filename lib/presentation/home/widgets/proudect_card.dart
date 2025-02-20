@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app_api/presentation/resources/app_assets.dart';
 
 class ProductCard extends StatelessWidget {
   final dynamic product;
   final bool isNewArrival;
-  const ProductCard({super.key, required this.product, this.isNewArrival = false});
+  const ProductCard(
+      {super.key, required this.product, this.isNewArrival = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,32 +19,26 @@ class ProductCard extends StatelessWidget {
           BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(0, 2))
         ],
       ),
-      child: Stack(
-        children: [
-          ClipRRect(
+      child: Stack(children: [
+        ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: CachedNetworkImage(
-              imageUrl: product['image'],
-              width: double.infinity,
-              height: 140,
-              fit: BoxFit.cover,
-              errorWidget: (context, url, error) =>
-                  Image.asset("assets/handle-error.jpg", fit: BoxFit.cover),
-            ),
-          ),
-          Positioned(
+                imageUrl: product['image'],
+                width: double.infinity,
+                height: 140,
+                fit: BoxFit.cover,
+                errorWidget: (context, url, error) =>
+                    Image.asset(AppAssets.handelErrors, fit: BoxFit.cover))),
+        Positioned(
             left: 20,
             bottom: 40,
-            child: Text(
-              product['name'],
-              style: TextStyle(
-                color: isNewArrival ? Colors.white : Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Positioned(
+            child: Text(product['name'],
+                style: TextStyle(
+                  color: isNewArrival ? Colors.white : Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ))),
+        Positioned(
             left: 20,
             bottom: 20,
             child: Text(
@@ -51,10 +47,8 @@ class ProductCard extends StatelessWidget {
                   color: Color(0xff64C3BF),
                   fontSize: 10,
                   fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
+            ))
+      ]),
     );
   }
 }

@@ -5,4 +5,5 @@ class AppAssets {
   static const onboarding1 = 'assets/onboarding1.png';
   static const onboarding2 = 'assets/onboarding2.png';
   static const onboarding3 = 'assets/onboarding3.png';
+  static const handelErrors = 'assets/handle-error.jpg';
 }
