@@ -3,19 +3,18 @@ import 'package:store_app_api/services/cart_services.dart';
 import '../models/cart_item_model.dart';
 import '../widgets/cart_item_tile.dart';
 import '../widgets/cart_total.dart';
-import '../widgets/custom_app_bar.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  _CartScreenState createState() => _CartScreenState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _CartScreenState extends State<CartScreen> {
-  final CartService _cartService = CartService();
-  List<CartItemModel> _cartItems = [];
+class _CartPageState extends State<CartPage> {
   bool _isLoading = true;
+  List<CartItemModel> _cartItems = [];
+  final CartService _cartService = CartService();
 
   @override
   void didChangeDependencies() {
@@ -35,8 +34,7 @@ class _CartScreenState extends State<CartScreen> {
   void _updateQuantity(int index, int change) async {
     int newQuantity = _cartItems[index].quantity + change;
     if (newQuantity > 0) {
-      bool success =
-          await _cartService.addToCart(_cartItems[index].productId, change);
+      bool success = await _cartService.addToCart(_cartItems[index].productId, change);
       if (success) {
         setState(() {
           _cartItems[index] = _cartItems[index].copyWith(quantity: newQuantity);
@@ -53,30 +51,16 @@ class _CartScreenState extends State<CartScreen> {
       setState(() {
         _cartItems.removeWhere((item) => item.id == cartItemId);
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.white,
-          content: Text(
-            "تم حذف المنتج من السلة",
-            style: TextStyle(fontSize: 12, color: Colors.blueGrey),
-          ),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("تم حذف المنتج من السلة")));
     }
   }
 
-  double _calculateTotalPrice() {
-    return _cartItems.fold(
-        0, (sum, item) => sum + (item.quantity * item.price));
-  }
+  double _calculateTotalPrice() => _cartItems.fold(0, (sum, item) => sum + (item.quantity * item.price));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: "ٍسلة المشتريات"),
-      ),
+      appBar: AppBar(title: const Text("ٍسلة المشتريات")),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _cartItems.isEmpty
@@ -88,14 +72,11 @@ class _CartScreenState extends State<CartScreen> {
                         itemCount: _cartItems.length,
                         itemBuilder: (context, index) => CartItemTile(
                           item: _cartItems[index],
-                          onUpdateQuantity: (change) =>
-                              _updateQuantity(index, change),
+                          onUpdateQuantity: (change) => _updateQuantity(index, change),
                         ),
                       ),
                     ),
-                    CartTotal(
-                        totalPrice: _calculateTotalPrice(),
-                        onCheckout: _checkout),
+                    CartTotal(totalPrice: _calculateTotalPrice(), onCheckout: _checkout),
                   ],
                 ),
     );
@@ -104,22 +85,10 @@ class _CartScreenState extends State<CartScreen> {
   void _checkout() async {
     bool success = await _cartService.checkoutCart();
     if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.white,
-          content: Text("تم تنفيذ الطلب بنجاح",
-              style: TextStyle(fontSize: 12, color: Colors.blueGrey)),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("تم تنفيذ الطلب بنجاح")));
       setState(() => _cartItems.clear());
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.white,
-          content: Text("!فشل في تنفيذ الطلب",
-              style: TextStyle(fontSize: 12, color: Colors.blueGrey)),
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("!فشل في تنفيذ الطلب")));
     }
   }
 }

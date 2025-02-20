@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
+
 import '../models/orders_model.dart';
 import '../services/order_services.dart';
-import '../widgets/custom_app_bar.dart';
 import '../widgets/order_list.dart';
 
 class OrdersScreen extends StatefulWidget {
   const OrdersScreen({super.key});
 
   @override
-  _OrdersScreenState createState() => _OrdersScreenState();
+  State<OrdersScreen> createState() => _OrdersScreenState();
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  final OrderService _orderService = OrderService();
-  List<OrderModel> _orders = [];
   bool _isLoading = true;
+  List<OrderModel> _orders = [];
+  final OrderService _orderService = OrderService();
 
   @override
-  void initState() {
-    super.initState();
-    _loadOrders();
-  }
+  void initState() => {super.initState(), _loadOrders()};
 
   Future<void> _loadOrders() async {
     try {
@@ -28,9 +25,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       if (!mounted) return;
 
       setState(() {
-        _orders = response
-            .map<OrderModel>((json) => OrderModel.fromJson(json))
-            .toList();
+        _orders = response.map<OrderModel>((json) => OrderModel.fromJson(json)).toList();
         _isLoading = false;
       });
     } catch (e) {
@@ -42,10 +37,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: "الطلبات"),
-      ),
+      appBar: AppBar(title: const Text("الطلبات")),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _orders.isEmpty

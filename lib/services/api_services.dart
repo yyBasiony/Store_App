@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
-  static const String baseUrl = "https://ib.jamalmoallart.com/api/v2";
   String? _cachedToken;
+  static const String baseUrl = "https://ib.jamalmoallart.com/api/v2";
 
   Future<String?> getToken() async {
     if (_cachedToken != null) return _cachedToken;

@@ -7,23 +7,12 @@ import '../presentation/welcome_screen.dart';
 class AuthService {
   static const String _baseUrl = "https://ib.jamalmoallart.com/api/v2";
 
-  Future<Map<String, dynamic>> register(String firstName, String lastName,
-      String phone, String address, String email, String password) async {
+  Future<Map<String, dynamic>> register(String firstName, String lastName, String phone, String address, String email, String password) async {
     final url = Uri.parse("$_baseUrl/register");
     final response = await http.post(
       url,
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: jsonEncode({
-        "first_name": firstName,
-        "last_name": lastName,
-        "phone": phone,
-        "address": address,
-        "email": email,
-        "password": password,
-      }),
+      headers: {"Accept": "application/json", "Content-Type": "application/json"},
+      body: jsonEncode({"first_name": firstName, "last_name": lastName, "phone": phone, "address": address, "email": email, "password": password}),
     );
 
     final responseData = json.decode(response.body);
@@ -87,19 +76,13 @@ class AuthService {
     try {
       bool isRevoked = await _isEmailRevoked(email);
       if (isRevoked) {
-        return {
-          "state": false,
-          "message": ".تم حظر هذا الحساب من تسجيل الدخول. يرجى إنشاء حساب جديد"
-        };
+        return {"state": false, "message": ".تم حظر هذا الحساب من تسجيل الدخول. يرجى إنشاء حساب جديد"};
       }
 
       final url = Uri.parse("$_baseUrl/login");
       final response = await http.post(
         url,
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
+        headers: {"Accept": "application/json", "Content-Type": "application/json"},
         body: jsonEncode({"email": email, "password": password}),
       );
 
@@ -127,10 +110,6 @@ class AuthService {
     await _clearUserData();
     await _clearToken();
 
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-      (route) => false,
-    );
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const WelcomeScreen()), (route) => false);
   }
 }

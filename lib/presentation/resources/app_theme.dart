@@ -8,7 +8,9 @@ class AppTheme {
       //
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
-        backgroundColor: Colors.transparent, // Icon: Color(0xff005B50)
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Color(0xff005B50)),
+        titleTextStyle: TextStyle(fontSize: 22, color: Color(0xff005B50), fontWeight: FontWeight.bold),
       ),
 
       elevatedButtonTheme: const ElevatedButtonThemeData(

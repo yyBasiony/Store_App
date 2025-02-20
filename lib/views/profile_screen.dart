@@ -5,20 +5,14 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String firstName = "";
-  String lastName = "";
-  String email = "";
-  String phone = "";
+  String firstName = "", lastName = "", email = "", phone = "";
 
   @override
-  void initState() {
-    super.initState();
-    _loadUserData();
-  }
+  void initState() => {super.initState(), _loadUserData()};
 
   Future<void> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -33,43 +27,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Color(0xff005B50)),
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xff005B50)),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text("الملف الشخصي", style: TextStyle(color: Color(0xff005B50))),
-        centerTitle: true,
-      ),
+      appBar: AppBar(centerTitle: true, title: const Text("الملف الشخصي")),
       body: Column(
         children: [
           const SizedBox(height: 30),
           Column(
+            spacing: 10,
             children: [
               const CircleAvatar(
                 radius: 75,
                 backgroundColor: Color(0xff005B50),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: AssetImage("assets/profile.jpg"),
-                ),
+                child: CircleAvatar(radius: 70, backgroundImage: AssetImage("assets/profile.jpg")),
               ),
-              const SizedBox(height: 10),
-              Text(
-                "$firstName $lastName",
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 10),
+              Text("$firstName $lastName", style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           ProfileTextField(label: "الاسم الأول", value: firstName),
           ProfileTextField(label: "اسم العائلة", value: lastName),
           ProfileTextField(label: "البريد الإلكتروني", value: email),
@@ -81,36 +54,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class ProfileTextField extends StatelessWidget {
-  final String label;
-  final String value;
-
+  final String label, value;
   const ProfileTextField({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          ),
-          TextField(
-            readOnly: true,
-            decoration: InputDecoration(
-              hintText: value,
-              hintStyle: TextStyle(color: Colors.grey.shade600),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.grey.shade400),
-              ),
-              focusedBorder: const UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.teal),
-              ),
-            ),
-          ),
-        ],
+      child: TextField(
+        readOnly: true,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: value,
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          hintStyle: TextStyle(color: Colors.grey.shade600),
+          labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
+        ),
       ),
     );
   }

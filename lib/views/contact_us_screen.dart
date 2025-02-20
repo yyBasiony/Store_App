@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_app_bar.dart';
-
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
 
   @override
-  _ContactUsScreenState createState() => _ContactUsScreenState();
+  State<ContactUsScreen> createState() => _ContactUsScreenState();
 }
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
@@ -17,15 +15,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'تم إرسال رسالتك بنجاح!',
-            style: TextStyle(fontSize: 12, color: Colors.blueGrey),
-          ),
-          backgroundColor: Colors.white,
-        ),
-      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('تم إرسال رسالتك بنجاح!')));
 
       _nameController.clear();
       _emailController.clear();
@@ -36,19 +26,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CustomAppBar(title: "اتصل بنا"),
-      ),
+      appBar: AppBar(title: const Text("اتصل بنا")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Center(
           child: Card(
             elevation: 4,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20),
               child: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
@@ -57,12 +43,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     children: [
                       TextFormField(
                         controller: _nameController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'الاسم الكامل',
-                          prefixIcon:
-                              const Icon(Icons.person, color: Color(0xff005B50)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                          prefixIcon: Icon(Icons.person, color: Color(0xff005B50)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -74,20 +58,16 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       const SizedBox(height: 16),
                       TextFormField(
                         controller: _emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'البريد الإلكتروني',
-                          prefixIcon:
-                              const Icon(Icons.email, color: Color(0xff005B50)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                          prefixIcon: Icon(Icons.email, color: Color(0xff005B50)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
                         ),
                         keyboardType: TextInputType.emailAddress,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'يرجى إدخال بريدك الإلكتروني';
-                          } else if (!RegExp(
-                                  r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}")
-                              .hasMatch(value)) {
+                          } else if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}").hasMatch(value)) {
                             return 'يرجى إدخال بريد إلكتروني صالح';
                           }
                           return null;
@@ -96,12 +76,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       const SizedBox(height: 16),
                       TextFormField(
                         controller: _messageController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'الرسالة',
-                          prefixIcon:
-                              const Icon(Icons.message, color: Color(0xff005B50)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12)),
+                          prefixIcon: Icon(Icons.message, color: Color(0xff005B50)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
                         ),
                         maxLines: 5,
                         validator: (value) {

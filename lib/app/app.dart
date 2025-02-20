@@ -9,11 +9,14 @@ class ShopeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: AppRoutes.routes,
-      locale: const Locale('en'),
       theme: AppTheme.getLightTheme(),
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreen,
+      //
+
+      routes: AppRoutes.routes,
+      initialRoute: AppRoutes.mainView,
+
+      locale: const Locale('en'),
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

@@ -1,20 +1,21 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:store_app_api/models/category_model.dart';
-import '../services/prodcut_services.dart';
+import 'package:flutter/material.dart';
+
+import '../models/category_model.dart';
+import '../services/product_services.dart';
 import 'products_list_page.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class CategoryPage extends StatefulWidget {
+  const CategoryPage({super.key});
 
   @override
-  _CategoryScreenState createState() => _CategoryScreenState();
+  State<CategoryPage> createState() => _CategoryPageState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
-  final ProductService _productService = ProductService();
-  List<CategoryModel> categories = [];
+class _CategoryPageState extends State<CategoryPage> {
   bool isLoading = true;
+  List<CategoryModel> categories = [];
+  final ProductService _productService = ProductService();
 
   @override
   void initState() {
@@ -26,9 +27,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     try {
       var response = await _productService.getCategories();
       setState(() {
-        categories = response
-            .map<CategoryModel>((json) => CategoryModel.fromJson(json))
-            .toList();
+        categories = response.map<CategoryModel>((json) => CategoryModel.fromJson(json)).toList();
         isLoading = false;
       });
     } catch (e) {
@@ -40,104 +39,54 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xff005B50)),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text(
-          "التصنيفات",
-          style: TextStyle(
-            color: Color(0xff005B50),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
+      appBar: AppBar(title: const Text("التصنيفات")),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: ListView.builder(
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   var category = categories[index];
                   return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductsListPage(
-                            categoryId: category.id,
-                            categoryName: category.name,
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: () => Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => ProductsListPage(categoryId: category.id, categoryName: category.name))),
                     child: Container(
                       margin: const EdgeInsets.only(bottom: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 5,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5, offset: Offset(0, 2))],
                       ),
                       child: Stack(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: CachedNetworkImage(
-                              imageUrl: category.imageUrl,
-                              width: double.infinity,
                               height: 150,
                               fit: BoxFit.cover,
-                              errorWidget: (context, url, error) => Image.asset(
-                                "assets/handle-error.jpg",
-                                fit: BoxFit.cover,
-                              ),
+                              width: double.infinity,
+                              imageUrl: category.imageUrl,
+                              errorWidget: (context, url, error) => Image.asset("assets/handle-error.jpg", fit: BoxFit.cover),
                             ),
                           ),
                           Container(
                             width: double.infinity,
                             height: 150,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                            decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
                               gradient: LinearGradient(
                                 begin: Alignment.center,
                                 end: Alignment.bottomCenter,
-                                colors: [
-                                  Colors.black.withOpacity(0.2),
-                                  Colors.black.withOpacity(0.6),
-                                ],
+                                colors: [Color.fromRGBO(0, 0, 0, .2), Color.fromRGBO(0, 0, 0, .6)],
                               ),
                             ),
                           ),
                           Positioned(
                             left: 20,
                             bottom: 20,
-                            child: Text(
-                              category.name,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            child: Text(category.name, style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
                           ),
-                          const Positioned(
-                            right: 20,
-                            bottom: 20,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Color(0xff64C3BF),
-                              size: 20,
-                            ),
-                          ),
+                          const Positioned(right: 20, bottom: 20, child: Icon(size: 20, Icons.arrow_forward_ios, color: Color(0xff64C3BF))),
                         ],
                       ),
                     ),

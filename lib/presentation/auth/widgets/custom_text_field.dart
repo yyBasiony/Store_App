@@ -6,7 +6,6 @@ import '../base/validation.dart';
 class CustomTextField extends StatefulWidget {
   final String label;
   final AuthController controller;
-
   const CustomTextField({super.key, required this.label, required this.controller});
 
   @override
@@ -15,7 +14,7 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool _isObscured = true;
-  late final Validation _validation;
+  late Validation _validation;
   late final TextEditingController _controller;
 
   bool get _isPassword => widget.label.toLowerCase().contains("password");
@@ -37,11 +36,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   void initState() {
     super.initState();
     _controller = widget.controller.controllers[widget.label]!;
-    _validation = Validation.fromLabel(widget.label, password: widget.controller.controllers["Password"]?.text);
   }
 
   @override
   Widget build(BuildContext context) {
+    _validation = Validation.fromLabel(widget.label, password: widget.controller.controllers["Password"]!.text);
+
     return TextFormField(
       controller: _controller,
       keyboardType: _keyboardType,
