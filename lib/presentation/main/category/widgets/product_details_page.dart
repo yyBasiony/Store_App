@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app_api/presentation/resources/app_theme.dart';
 import '../../../../models/product_details_model.dart';
 import '../../../../services/cart_services.dart';
 import '../../../../services/product_services.dart';
@@ -49,10 +50,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Colors.white,
         content: Text(
           success ? "تم إضافة المنتج إلى السلة" : "فشل في إضافة المنتج!",
-          style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
+          style: AppTheme.getLightTheme().snackBarTheme.contentTextStyle,
         ),
       ),
     );
@@ -91,14 +91,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    _productDetails!.imageUrl,
-                    height: 250,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(
+                      _productDetails!.imageUrl,
+                      height: 250,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )),
                 const SizedBox(height: 16),
                 Text(
                   _productDetails!.name,
