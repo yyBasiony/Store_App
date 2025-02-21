@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/product_details_model.dart';
-import '../services/cart_services.dart';
-import '../services/product_services.dart';
-import '../widgets/product_details_view.dart';
+import '../../../../models/product_details_model.dart';
+import '../../../../services/cart_services.dart';
+import '../../../../services/product_services.dart';
+import 'product_details_view.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
@@ -66,8 +66,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: AppBar(
         title: Text(
           _productDetails?.name ?? "تفاصيل المنتج",
-          style:
-              const TextStyle(color: Color(0xff005B50), fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Color(0xff005B50), fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Color(0xff005B50)),

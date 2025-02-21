@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../services/product_services.dart';
-import '../../../views/product_details_screen.dart';
+import '../category/widgets/product_details_screen.dart';
 
 class ProductSearchDelegate extends SearchDelegate {
   List<dynamic> _allProducts = [];

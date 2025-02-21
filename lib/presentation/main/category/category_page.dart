@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../models/category_model.dart';
-import '../../services/product_services.dart';
-import '../../views/products_list_page.dart';
-import '../resources/app_assets.dart';
+import '../../../models/category_model.dart';
+import '../../../services/product_services.dart';
+import '../../resources/app_theme.dart';
+import 'widgets/products_list_page.dart';
+import '../../resources/app_assets.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -39,6 +40,7 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.getLightTheme().scaffoldBackgroundColor,
       appBar: AppBar(title: const Text("التصنيفات")),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import '../models/product_details_model.dart';
+import '../../../../models/product_details_model.dart';
 
 class ProductDetailsView extends StatelessWidget {
   final ProductDetailsModel productDetails;
   final bool isAdding;
   final VoidCallback onAddToCart;
 
-  const ProductDetailsView({super.key, 
+  const ProductDetailsView({
+    super.key,
     required this.productDetails,
     required this.isAdding,
     required this.onAddToCart,
@@ -21,6 +22,7 @@ class ProductDetailsView extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xff005B50), width: 2),
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
             ),
@@ -39,10 +41,7 @@ class ProductDetailsView extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   productDetails.name,
-                  style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
                 ),
                 const SizedBox(height: 10),
                 Text(
@@ -52,10 +51,7 @@ class ProductDetailsView extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(
                   "\$${productDetails.price.toStringAsFixed(2)}",
-                  style: const TextStyle(
-                      fontSize: 22,
-                      color: Color(0xff64C3BF),
-                      fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 22, color: Color(0xff64C3BF), fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -65,14 +61,11 @@ class ProductDetailsView extends StatelessWidget {
                     onPressed: onAddToCart,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xff6c7376),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
                     child: isAdding
                         ? const CircularProgressIndicator(color: Color(0xff6c7376))
-                        : const Text("إضافة إلى السلة 🛒",
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.white)),
+                        : const Text("إضافة إلى السلة 🛒", style: TextStyle(fontSize: 18, color: Colors.white)),
                   ),
                 ),
               ],
