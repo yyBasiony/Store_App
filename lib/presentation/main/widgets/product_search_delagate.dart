@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../services/product_services.dart';
-import '../category/widgets/product_details_screen.dart';
+import '../category/widgets/product_details_page.dart';
 
 class ProductSearchDelegate extends SearchDelegate {
   List<dynamic> _allProducts = [];
@@ -45,7 +45,7 @@ class ProductSearchDelegate extends SearchDelegate {
           title: Text(product['name']),
           subtitle: Text("\$${(product['price'])}"),
           leading: Image.network(width: 50, height: 50, product['image'], fit: BoxFit.cover),
-          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsScreen(productId: product['id']))),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage(productId: product['id']))),
         );
       },
     );

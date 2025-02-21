@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../models/product_details_model.dart';
 import '../../../../services/product_services.dart';
 import '../../../resources/app_theme.dart';
-import 'product_details_screen.dart';
+import 'product_details_page.dart';
 
 class ProductsListPage extends StatefulWidget {
   final int categoryId;
@@ -72,7 +72,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
         return GestureDetector(
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (_) => ProductDetailsScreen(productId: product.id)),
+            MaterialPageRoute(builder: (_) => ProductDetailsPage(productId: product.id)),
           ),
           child: Container(
             decoration: BoxDecoration(
