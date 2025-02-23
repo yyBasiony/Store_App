@@ -5,7 +5,7 @@ import 'category/category_page.dart';
 import 'widgets/custom_bottom_nav_bar.dart';
 import 'widgets/custom_drawer.dart';
 import 'widgets/home_content.dart';
-import 'widgets/product_search_delagate.dart';
+import 'widgets/product_search_anchor.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -34,7 +34,7 @@ class _MainViewState extends State<MainView> {
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      actions: [IconButton(icon: const Icon(Icons.search), onPressed: () => showSearch(context: context, delegate: ProductSearchDelegate()))],
+      actions: [ProductSearchAnchor()],
     );
   }
 }
