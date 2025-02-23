@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../views/contact_us_screen.dart';
 import '../../views/logout_page.dart';
 import '../../views/orders_screen.dart';
-import '../../views/profile_screen.dart';
+import '../auth/profile/profile_page.dart';
 import '../auth/login/login_screen.dart';
 import '../auth/register/register_screen.dart';
 import '../main/main_view.dart';
@@ -26,7 +26,7 @@ class AppRoutes {
     logoutPage: (_) => const LogoutPage(),
     loginScreen: (_) => const LoginScreen(),
     ordersScreen: (_) => const OrdersScreen(),
-    profileScreen: (_) => const ProfileScreen(),
+    profileScreen: (_) => const ProfilePage(),
     welcomeScreen: (_) => const WelcomeScreen(),
     registerScreen: (_) => const RegisterScreen(),
     contactUsScreen: (_) => const ContactUsScreen(),
