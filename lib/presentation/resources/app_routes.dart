@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../views/contact_us_screen.dart';
-import '../../views/logout_page.dart';
-import '../../views/orders_screen.dart';
+import '../auth/contact_us/contact_us_screen.dart';
+import '../auth/logout/logout_page.dart';
+import '../main/orders/orders_screen.dart';
 import '../auth/profile/profile_page.dart';
 import '../auth/login/login_screen.dart';
 import '../auth/register/register_screen.dart';

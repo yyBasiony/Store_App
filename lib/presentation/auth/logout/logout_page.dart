@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../services/auth_services.dart';
+import '../../../services/auth_services.dart';
+import '../../resources/app_assets.dart';
 
 class LogoutPage extends StatefulWidget {
   const LogoutPage({super.key});
@@ -18,7 +19,7 @@ class _LogoutPageState extends State<LogoutPage> {
   Future<void> _loadUserEmail() async {
     final userEmail = await _authService.getUserEmail();
     setState(() {
-      email = userEmail ?? "user@example.com";
+      email = userEmail ?? "yasmine@gmail.com";
     });
   }
 
@@ -33,7 +34,7 @@ class _LogoutPageState extends State<LogoutPage> {
             const CircleAvatar(
               radius: 75,
               backgroundColor: Color(0xff005B50),
-              child: CircleAvatar(radius: 70, backgroundImage: AssetImage("assets/profile.jpg")),
+              child: CircleAvatar(radius: 70, backgroundImage: AssetImage(AppAssets.profile)),
             ),
             const SizedBox(height: 20),
             Text(email, style: const TextStyle(fontSize: 14, color: Colors.grey)),
