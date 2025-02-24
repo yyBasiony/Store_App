@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class CartTotal extends StatelessWidget {
   final double totalPrice;
   final VoidCallback onCheckout;

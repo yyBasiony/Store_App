@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store_app_api/services/cart_services.dart';
 import '../../../models/cart_item_model.dart';
-import '../../../widgets/cart_item_tile.dart';
-import '../../../widgets/cart_total.dart';
+import 'cart_total.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -57,6 +56,39 @@ class _CartPageState extends State<CartPage> {
 
   double _calculateTotalPrice() => _cartItems.fold(0, (sum, item) => sum + (item.quantity * item.price));
 
+  Widget _buildCartItemTile(CartItemModel item, int index) {
+    return Column(
+      children: [
+        ListTile(
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              item.imageUrl,
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported, color: Colors.grey),
+            ),
+          ),
+          title: Text(item.name, style: const TextStyle(fontSize: 15, color: Colors.black)),
+          subtitle: Text(
+            "الكمية: ${item.quantity}   السعر: \$${item.price.toStringAsFixed(2)}",
+            style: const TextStyle(fontSize: 12, color: Colors.blueGrey),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(icon: const Icon(Icons.remove_circle_outline, color: Colors.red), onPressed: () => _updateQuantity(index, -1)),
+              Text('${item.quantity}', style: const TextStyle(fontSize: 16)),
+              IconButton(icon: const Icon(Icons.add_circle_outline, color: Colors.green), onPressed: () => _updateQuantity(index, 1)),
+            ],
+          ),
+        ),
+        const Divider(color: Color(0xff005B50), thickness: 1.5),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,10 +102,7 @@ class _CartPageState extends State<CartPage> {
                     Expanded(
                       child: ListView.builder(
                         itemCount: _cartItems.length,
-                        itemBuilder: (context, index) => CartItemTile(
-                          item: _cartItems[index],
-                          onUpdateQuantity: (change) => _updateQuantity(index, change),
-                        ),
+                        itemBuilder: (context, index) => _buildCartItemTile(_cartItems[index], index),
                       ),
                     ),
                     CartTotal(totalPrice: _calculateTotalPrice(), onCheckout: _checkout),
