@@ -3,12 +3,12 @@
 -is an e-commerce application that allows users to browse products,
 
 ## Features
- - Display a list of available products
- - Categorize products by type
- - View product details
- - Add products to the shopping cart
- -Display products orders
- - User-friendly and attractive UI
+  - Display a list of available products
+  - Categorize products by type
+  - View product details
+  - Add products to the shopping cart
+  - Display products orders
+  - User-friendly and attractive UI
 
 ##  Requirements
 Before running the app, ensure you have the following installed:
