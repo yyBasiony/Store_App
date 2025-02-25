@@ -36,4 +36,4 @@ Before running the app, ensure you have the following installed:
    flutter run
    ```
 ##  UI
-
+![ui](https://github.com/yyBasiony/Store_App/blob/main/ui.jpg)
