@@ -18,22 +18,22 @@ Before running the app, ensure you have the following installed:
 - Android emulator or real device
 
 ##  How to Run the Project
+   
 1. Clone the repository to your device:
-   '''bash
-      git clone https://github.com/yyBasiony/Store_App.git
-   ```
-3. Navigate to the project folder:
    ```bash
-      cd Store_App
+   git clone https://github.com/yyBasiony/Store_App.git
    ```
-4. Install required dependencies:
+2. Navigate to the project folder:
+   ```bash
+   cd Store_App
+   ```
+3. Install required dependencies:
    ```bash
    flutter pub get
    ```
-5. Run the app on an emulator or physical device:
+4. Run the app on an emulator or physical device:
    ```bash
    flutter run
    ```
-
 ##  UI
 
