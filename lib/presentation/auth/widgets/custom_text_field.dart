@@ -33,10 +33,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller.controllers[widget.label]!;
-  }
+void initState() {
+  super.initState();
+  _controller = widget.controller.controllers[widget.label]!;
+  _controller.addListener(() {
+    setState(() {});
+  });
+}
+
 
   @override
   Widget build(BuildContext context) {

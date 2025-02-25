@@ -25,7 +25,7 @@ abstract class Validation {
 class FirstNameValidation extends Validation {
   @override
   String? _validate(String value) {
-    final firstNameRegex = RegExp(r"^[A-Z][a-z]*$");
+final firstNameRegex = RegExp(r"^[A-Z][a-zA-Z' ]*$");
     return firstNameRegex.hasMatch(value) ? null : "First name must start with a capital letter";
   }
 }
@@ -33,10 +33,11 @@ class FirstNameValidation extends Validation {
 class LastNameValidation extends Validation {
   @override
   String? _validate(String value) {
-    final lastNameRegex = RegExp(r"^[A-Z][a-z]*$");
+final lastNameRegex = RegExp(r"^[A-Z][a-zA-Z' ]*$");
     return lastNameRegex.hasMatch(value) ? null : "Last name must start with a capital letter";
   }
 }
+
 
 class EmailValidation extends Validation {
   @override

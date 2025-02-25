@@ -14,7 +14,8 @@ class ShopeApp extends StatelessWidget {
       //
 
       routes: AppRoutes.routes,
-      initialRoute: AppRoutes.mainView,
+      initialRoute: AppRoutes.onboardingScreen,
+
 
       locale: const Locale('en'),
       localizationsDelegates: const [
