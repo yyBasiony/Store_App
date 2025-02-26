@@ -10,7 +10,7 @@ abstract class AuthController {
     }
   }
 
-  String getFieldValue(String field) => controllers[field]?.text ?? '';
+  String getFieldValue(String field) => controllers[field]?.text.trim() ?? '';
   
   void dispose() {
     for (var controller in controllers.values) {

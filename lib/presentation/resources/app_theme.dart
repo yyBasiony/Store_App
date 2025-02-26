@@ -7,6 +7,7 @@ class AppTheme {
     return ThemeData(
       //
       scaffoldBackgroundColor: Colors.white,
+
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Color(0xff005B50)),
@@ -52,6 +53,10 @@ class AppTheme {
       snackBarTheme: const SnackBarThemeData(
         backgroundColor: Colors.white,
         contentTextStyle: TextStyle(fontSize: 12, color: Colors.blueGrey),
+      ),
+
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        selectedItemColor: Color(0xff005B50),
       ),
     );
   }

@@ -10,6 +10,7 @@ class ContactUsScreen extends StatefulWidget {
 
 class _ContactUsScreenState extends State<ContactUsScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
@@ -26,12 +27,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     }
   }
 
-  Widget _buildTextField({
-    required String label,
-    required TextEditingController controller,
-    required IconData icon,
-    int maxLines = 1,
-  }) {
+  Widget _buildTextField({required String label, required TextEditingController controller, required IconData icon, int maxLines = 1}) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -70,30 +66,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _buildTextField(
-                        label: "FirstName",
-                        controller: _nameController,
-                        icon: Icons.person,
-                      ),
+                      _buildTextField(label: "FirstName", icon: Icons.person, controller: _nameController),
                       const SizedBox(height: 16),
-                      _buildTextField(
-                        label: "Email",
-                        controller: _emailController,
-                        icon: Icons.email,
-                      ),
+                      _buildTextField(label: "Email", icon: Icons.email, controller: _emailController),
                       const SizedBox(height: 16),
-                      _buildTextField(
-                        label: "Message",
-                        controller: _messageController,
-                        icon: Icons.message,
-                        maxLines: 5,
-                      ),
+                      _buildTextField(maxLines: 5, label: "Message", icon: Icons.message, controller: _messageController),
                       const SizedBox(height: 24),
                       FloatingActionButton(
-                        onPressed: _submitForm,
-                        backgroundColor: const Color(0xff005B50),
-                        child: const Icon(Icons.send, color: Colors.white),
-                      ),
+                          onPressed: _submitForm, backgroundColor: const Color(0xff005B50), child: const Icon(Icons.send, color: Colors.white)),
                     ],
                   ),
                 ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../services/product_services.dart';
 import '../../resources/app_assets.dart';
+import '../widgets/custom_drawer.dart';
+import '../widgets/product_search_anchor.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,12 +13,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        spacing: 20,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_buildNewProducts(), _buildAllProducts()],
+    return Scaffold(
+      drawer: const CustomDrawer(),
+      appBar: AppBar(actions: const [ProductSearchAnchor()]),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          spacing: 20,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [_buildNewProducts(), _buildAllProducts()],
+        ),
       ),
     );
   }

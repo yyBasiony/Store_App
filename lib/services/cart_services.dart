@@ -1,32 +1,21 @@
-import 'package:store_app_api/services/api_services.dart';
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+
+import 'api_services.dart';
 
 class CartService {
   final ApiService _apiService = ApiService();
 
   Future<bool> addToCart(int productId, int quantity) async {
     String? token = await _apiService.getToken();
-    if (token == null) {
-      print(" Token not available!");
-      return false;
-    }
+    if (token == null) return false;
 
     final response = await http.post(
       Uri.parse("${ApiService.baseUrl}/carts/add"),
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Bearer $token",
-        "Content-Type": "application/json",
-      },
-      body: jsonEncode({
-        "product_id": productId,
-        "quantity": quantity.toString(),
-        "token": token,
-      }),
+      body: jsonEncode({"token": token, "product_id": productId, "quantity": quantity.toString()}),
+      headers: {"Accept": "application/json", "Authorization": "Bearer $token", "Content-Type": "application/json"},
     );
-
-    print(" API Response: ${response.body}");
 
     return response.statusCode == 200;
   }
@@ -85,8 +74,7 @@ class CartService {
     }
 
     final response = await http.get(
-      Uri.parse(
-          "${ApiService.baseUrl}/carts/$cartItemId/remove?token=$token&id=$cartItemId"),
+      Uri.parse("${ApiService.baseUrl}/carts/$cartItemId/remove?token=$token&id=$cartItemId"),
       headers: {
         "Accept": "application/json",
         "Authorization": "Bearer $token",

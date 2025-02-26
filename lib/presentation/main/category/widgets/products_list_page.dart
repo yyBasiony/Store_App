@@ -48,12 +48,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
           ? const Center(child: CircularProgressIndicator(color: Color(0xff005B50)))
           : products.isNotEmpty
               ? _buildGridViewWidget(products)
-              : const Center(
-                  child: Text(
-                    " لا توجد منتجات متاحة",
-                    style: TextStyle(color: Color(0xff005B50), fontSize: 18),
-                  ),
-                ),
+              : const Center(child: Text(" لا توجد منتجات متاحة", style: TextStyle(color: Color(0xff005B50), fontSize: 18))),
     );
   }
 
@@ -61,24 +56,17 @@ class _ProductsListPageState extends State<ProductsListPage> {
     return GridView.builder(
       itemCount: products.length,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        childAspectRatio: .75,
-      ),
+      gridDelegate:
+          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 15, crossAxisSpacing: 15, childAspectRatio: .75),
       itemBuilder: (_, index) {
         var product = products[index];
         return GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => ProductDetailsPage(productId: product.id)),
-          ),
+          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProductDetailsPage(productId: product.id))),
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xff005B50), width: 2),
               color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+              border: Border.all(color: const Color(0xff005B50), width: 2),
               boxShadow: const [BoxShadow(blurRadius: 5, offset: Offset(0, 3), color: Colors.black12)],
             ),
             child: Column(
@@ -88,10 +76,7 @@ class _ProductsListPageState extends State<ProductsListPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-                      image: DecorationImage(
-                        image: CachedNetworkImageProvider(product.imageUrl),
-                        fit: BoxFit.cover,
-                      ),
+                      image: DecorationImage(fit: BoxFit.cover, image: CachedNetworkImageProvider(product.imageUrl)),
                     ),
                   ),
                 ),
@@ -102,17 +87,10 @@ class _ProductsListPageState extends State<ProductsListPage> {
                       Text(
                         product.name,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Color(0xff005B50),
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: const TextStyle(fontSize: 16, color: Color(0xff005B50), fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 5),
-                      Text(
-                        "${product.price} \$",
-                        style: const TextStyle(fontSize: 14, color: Color(0xff009688)),
-                      ),
+                      Text("${product.price} \$", style: const TextStyle(fontSize: 14, color: Color(0xff009688))),
                     ],
                   ),
                 ),

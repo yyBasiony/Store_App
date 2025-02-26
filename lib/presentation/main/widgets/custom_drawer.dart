@@ -21,7 +21,7 @@ class CustomDrawer extends StatelessWidget {
             _buildDrawerItem(context, Icons.contact_mail, "اتصل بنا", AppRoutes.contactUsScreen),
             ListTile(
               title: const Text("تسجيل الخروج"),
-              onTap: () => Navigator.pushNamed(context, AppRoutes.logoutPage),
+              onTap: () => Navigator.pushNamed(context, AppRoutes.logoutScreen),
               leading: const Icon(Icons.logout, color: Colors.red, size: 30),
             ),
           ],

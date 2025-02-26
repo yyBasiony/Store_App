@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:store_app_api/services/cart_services.dart';
+
 import '../../../models/cart_item_model.dart';
+import '../../../services/cart_services.dart';
 import 'cart_total.dart';
 
 class CartPage extends StatefulWidget {
@@ -102,7 +103,7 @@ class _CartPageState extends State<CartPage> {
                     Expanded(
                       child: ListView.builder(
                         itemCount: _cartItems.length,
-                        itemBuilder: (context, index) => _buildCartItemTile(_cartItems[index], index),
+                        itemBuilder: (_, index) => _buildCartItemTile(_cartItems[index], index),
                       ),
                     ),
                     CartTotal(totalPrice: _calculateTotalPrice(), onCheckout: _checkout),

@@ -1,4 +1,3 @@
-import '../../../models/user_model.dart';
 import '../../../services/auth_services.dart';
 import '../base/controller.dart';
 
@@ -13,7 +12,7 @@ class LoginController extends AuthController {
       final response = await _authService.login(
           getFieldValue("Email"), getFieldValue("Password"));
       if (response["state"] == true) {
-        UserModel userModel = UserModel.fromJson(response["data"]);
+        // UserModel userModel = UserModel.fromJson(response["data"]);
         return true;
       }
     }

@@ -1,3 +1,4 @@
+import '../models/product_details_model.dart';
 import 'api_services.dart';
 
 class ProductService {
@@ -15,7 +16,7 @@ class ProductService {
     return await _apiService.fetchData("/categories/$categoryId/products");
   }
 
-  Future<Map<String, dynamic>?> getProductDetails(int productId) async {
+  Future<ProductDetailsModel?> getProductDetails(int productId) async {
     return await _apiService.fetchSingleData("/products/$productId/show");
   }
 

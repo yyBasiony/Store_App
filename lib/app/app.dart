@@ -6,6 +6,7 @@ import '../presentation/resources/app_theme.dart';
 
 class ShopeApp extends StatelessWidget {
   const ShopeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,9 +14,8 @@ class ShopeApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //
 
-      routes: AppRoutes.routes,
-      initialRoute: AppRoutes.onboardingScreen,
-
+      initialRoute: AppRoutes.mainView,
+      onGenerateRoute: AppRoutes.generateRoutes,
 
       locale: const Locale('en'),
       localizationsDelegates: const [

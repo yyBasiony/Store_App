@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../../services/auth_services.dart';
-import '../../resources/app_assets.dart';
 
-class LogoutPage extends StatefulWidget {
-  const LogoutPage({super.key});
+import '../../../services/auth_services.dart';
+import '../widgets/profile_avatar.dart';
+
+class LogoutScreen extends StatefulWidget {
+  const LogoutScreen({super.key});
 
   @override
-  State<LogoutPage> createState() => _LogoutPageState();
+  State<LogoutScreen> createState() => _LogoutPageState();
 }
 
-class _LogoutPageState extends State<LogoutPage> {
+class _LogoutPageState extends State<LogoutScreen> {
   String email = "yasmine@gmail.com";
   final AuthService _authService = AuthService();
 
@@ -18,9 +19,7 @@ class _LogoutPageState extends State<LogoutPage> {
 
   Future<void> _loadUserEmail() async {
     final userEmail = await _authService.getUserEmail();
-    setState(() {
-      email = userEmail ?? "yasmine@gmail.com";
-    });
+    setState(() => email = userEmail ?? "yasmine@gmail.com");
   }
 
   @override
@@ -31,11 +30,7 @@ class _LogoutPageState extends State<LogoutPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CircleAvatar(
-              radius: 75,
-              backgroundColor: Color(0xff005B50),
-              child: CircleAvatar(radius: 70, backgroundImage: AssetImage(AppAssets.profile)),
-            ),
+            const ProfileAvatar(),
             const SizedBox(height: 20),
             Text(email, style: const TextStyle(fontSize: 14, color: Colors.grey)),
             const SizedBox(height: 30),

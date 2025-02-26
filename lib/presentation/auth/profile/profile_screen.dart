@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../resources/app_assets.dart';
 import '../base/validation.dart';
+import '../widgets/profile_avatar.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController firstNameController = TextEditingController();
@@ -20,10 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController phoneController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _loadUserData();
-  }
+  void initState() => {super.initState(), _loadUserData()};
 
   Future<void> _loadUserData() async {
     final prefs = await SharedPreferences.getInstance();
@@ -46,11 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
             const SizedBox(height: 30),
             Column(
               children: [
-                const CircleAvatar(
-                  radius: 75,
-                  backgroundColor: Color(0xff005B50),
-                  child: CircleAvatar(radius: 70, backgroundImage: AssetImage(AppAssets.profile)),
-                ),
+                const ProfileAvatar(),
                 Text(
                   "${firstNameController.text} ${lastNameController.text}",
                   style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
@@ -66,9 +59,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('valid')),
-                  );
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('valid')));
                 }
               },
               child: const Text("Confirm"),
@@ -79,10 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildProfileTextField({
-    required String label,
-    required TextEditingController controller,
-  }) {
+  Widget _buildProfileTextField({required String label, required TextEditingController controller}) {
     final validation = Validation.fromLabel(label);
 
     return Padding(

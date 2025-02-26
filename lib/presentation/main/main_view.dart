@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'cart/cart_screen.dart';
+import '../resources/app_constants.dart';
+import 'cart/cart_page.dart';
 import 'category/category_page.dart';
-import 'widgets/custom_bottom_nav_bar.dart';
-import 'widgets/custom_drawer.dart';
-import 'widgets/home_content.dart';
-import 'widgets/product_search_anchor.dart';
+import 'home/home_page.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -25,16 +23,12 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
-      backgroundColor: Colors.grey[100],
-      drawer: _selectedIndex == 0 ? const CustomDrawer() : null,
-      appBar: _selectedIndex == 0 ? _buildAppBar(context) : null,
-      bottomNavigationBar: CustomBottomNavBar(onItemTapped: _onItemTapped, selectedIndex: _selectedIndex),
-    );
-  }
-
-  AppBar _buildAppBar(BuildContext context) {
-    return AppBar(
-      actions: [ProductSearchAnchor()],
+      //
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _onItemTapped,
+        currentIndex: _selectedIndex,
+        items: [for (var item in AppConstants.bottomNavBarData) BottomNavigationBarItem(icon: Icon(item.icon), label: item.label)],
+      ),
     );
   }
 }

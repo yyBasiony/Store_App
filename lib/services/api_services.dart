@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/product_details_model.dart';
+
 class ApiService {
   String? _cachedToken;
   static const String baseUrl = "https://ib.jamalmoallart.com/api/v2";
@@ -34,7 +36,7 @@ class ApiService {
     return [];
   }
 
-  Future<Map<String, dynamic>?> fetchSingleData(String endpoint) async {
+  Future<ProductDetailsModel?> fetchSingleData(String endpoint) async {
     String? token = await getToken();
     if (token == null) return null;
 
@@ -45,8 +47,9 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return data['state'] == true ? data['data'] : null;
+      return data['state'] == true ? ProductDetailsModel.fromJson(data['data']) : null;
     }
+
     return null;
   }
 
@@ -56,11 +59,7 @@ class ApiService {
 
     final response = await http.post(
       Uri.parse("$baseUrl$endpoint"),
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Bearer $token",
-        "Content-Type": "application/json"
-      },
+      headers: {"Accept": "application/json", "Authorization": "Bearer $token", "Content-Type": "application/json"},
       body: jsonEncode(body),
     );
 

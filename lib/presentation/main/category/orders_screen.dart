@@ -35,12 +35,13 @@ class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("الطلبات")),
-        body: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : _orders.isEmpty
-                ? const Center(child: Text("!!! لا يوجد طلبات بعد"))
-                : _buildOrdersList(_orders));
+      appBar: AppBar(title: const Text("الطلبات")),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _orders.isEmpty
+              ? const Center(child: Text("!!! لا يوجد طلبات بعد"))
+              : _buildOrdersList(_orders),
+    );
   }
 
   Widget _buildOrdersList(List<OrderModel> orders) {
@@ -48,6 +49,7 @@ class _OrdersScreenState extends State<OrdersScreen> {
       itemCount: orders.length,
       itemBuilder: (context, index) {
         var order = orders[index];
+        
         return Card(
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: ListTile(
@@ -55,14 +57,11 @@ class _OrdersScreenState extends State<OrdersScreen> {
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported, size: 50, color: Colors.grey)),
+                errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported, size: 50, color: Colors.grey)),
             title: Text(order.name, style: const TextStyle(fontSize: 15, color: Colors.black)),
             subtitle: Text("الكمية: ${order.quantity}     السعر: \$${order.price.toStringAsFixed(2)}",
                 style: const TextStyle(fontSize: 12, color: Colors.blueGrey)),
-            trailing: Text(
-              order.createdAt,
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-            ),
+            trailing: Text(order.createdAt, style: const TextStyle(fontSize: 12, color: Colors.grey)),
           ),
         );
       },

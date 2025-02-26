@@ -11,12 +11,12 @@ class RegisterController extends AuthController {
   Future<bool> authenticate() async {
     if (formKey.currentState!.validate()) {
       final response = await _authService.register(
-      getFieldValue("FirstName").trim(),
-      getFieldValue("LastName").trim(),
-      getFieldValue("Phone").trim(),
+      getFieldValue("FirstName"),
+      getFieldValue("LastName"),
+      getFieldValue("Phone"),
       "الزقازيق",
-      getFieldValue("Email").trim(),
-      getFieldValue("Password").trim(),
+      getFieldValue("Email"),
+      getFieldValue("Password"),
       );
 
       if (response["state"] == true) {

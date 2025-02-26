@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'app_assets.dart';
 
 class AppConstants {
@@ -16,6 +18,13 @@ class AppConstants {
     ),
     (title: 'توصيل سريع وموثوق', image: AppAssets.onboarding3, description: '!استلم طلباتك بسرعة مع خيارات توصيل مرنة تناسب جدولك الزمني')
   ];
+
+  static const List<BottomNavBarData> bottomNavBarData = [
+    (label: 'الرئيسية', icon: Icons.home),
+    (label: 'التصنيفات', icon: Icons.category),
+    (label: 'السلة', icon: Icons.shopping_cart)
+  ];
 }
 
+typedef BottomNavBarData = ({String label, IconData icon});
 typedef OnboardingData = ({String title, String image, String description});
